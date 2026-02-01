@@ -1,0 +1,14 @@
+# Environnement virtuel
+.env/
+.venv/
+env/
+venv/
+
+# Logs et fichiers temporaires
+*.log
+*.tmp
+
+# Fichiers python
+__pycache__/
+*.py[cod]
+*$py.class
