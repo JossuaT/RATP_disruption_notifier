@@ -16,3 +16,6 @@ __pycache__/
 # Fichiers avec des informations confidentielles (mots de passe, clé API, etc.)
 **/secrets.txt
 secrets.txt
+
+# Fichiers retourné par l'API
+outputs/
