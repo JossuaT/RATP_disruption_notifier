@@ -3,11 +3,12 @@ from dotenv import load_dotenv
 
 
 # Création de l'image docker
-subprocess.run(
-    ["docker", "compose", "-f", "scripts/database/compose.yaml", "up"],
+results = subprocess.run(
+    ["docker", "compose", "-f", "scripts/database/compose.yaml", "up", "-d"],
     capture_output=True,
     shell=True
 )
+print (results.stdout, results.stderr)
 
 
 # Connexion à la base de données
@@ -19,12 +20,15 @@ conn = psycopg2.connect(
     port=os.getenv("PORT"),
     dbname=os.getenv("POSTGRES_DB")
 )
+conn.autocommit = True
 cur = conn.cursor()
 
-
 # Exécution des scripts sql
-with open("sql/create_db.sql", "r") as f:
-    cur.execute(f.read())
-with open("sql/create_shemas.sql", "r") as f:
+with open("./scripts/database/sql/create_db.sql", "r") as f:
+    try:
+        cur.execute(f.read())
+    except psycopg2.errors.DuplicateDatabase:
+        print ("Database already exists, skipping.")
+with open("./scripts/database/sql/create_shemas.sql", "r") as f:
     cur.execute(f.read())
 cur.close(), conn.close()
