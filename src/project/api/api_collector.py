@@ -1,10 +1,10 @@
 import requests, json
 
-from functions import get_secret
+from functions import get_secret, save_as_json
 
 
-host = "https://prim.iledefrance-mobilites.fr/marketplace"
-path = "/disruptions_bulk/disruptions/v2"
+host = "https://prim.iledefrance-mobilites.fr"
+path = "/marketplace/disruptions_bulk/disruptions/v2"
 
 url = host + path
 
@@ -13,7 +13,14 @@ url = host + path
 # Métro 4
 # C01374
 
-url="https://prim.iledefrance-mobilites.fr/marketplace/v2/navitia/line_reports/lines/line%3AIDFM%3AC01742/line_reports?count=100"
+# Disruptions - line A
+url=host+"/marketplace/v2/navitia/line_reports/lines/line%3AIDFM%3AC01742/line_reports?count=100"
+
+# Nav
+url=host+"/marketplace/v2/navitia/isochrones"
+
+# 
+#url=host+"/marketplace/iboo/lines.json"
 
 payload = {}
 headers = {
@@ -22,7 +29,5 @@ headers = {
 
 response = requests.request("GET", url, headers=headers, data=payload)
 
-data = response.json()
 
-with open('data.json', 'w', encoding="utf-8") as f:
-  json.dump(data, f, indent=4, ensure_ascii=False, sort_keys=True)
+save_as_json(response, 'outputs/data_itineraire.json')
