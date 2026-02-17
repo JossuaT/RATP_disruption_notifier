@@ -4,6 +4,10 @@
 env/
 venv/
 
+# Fichiers contenants les variables d'environnement
+.env
+env
+
 # Logs et fichiers temporaires
 *.log
 *.tmp
