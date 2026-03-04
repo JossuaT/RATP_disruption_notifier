@@ -1,5 +1,5 @@
 import requests
-from api.functions import get_secret
+from project.utils.functions import get_secret
 
 def notify_webhook(data={}, webhook_url=get_secret("WEBHOOK_URL"), headers={'Content-Type': 'applications/json'}):
     

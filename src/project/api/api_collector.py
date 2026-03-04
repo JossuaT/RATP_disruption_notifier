@@ -1,6 +1,6 @@
 import requests, json
 
-from functions import get_secret, save_as_json
+from project.utils.functions import get_secret, save_as_json
 
 
 host = "https://prim.iledefrance-mobilites.fr"
